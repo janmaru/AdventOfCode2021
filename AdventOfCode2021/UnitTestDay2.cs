@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace AdventOfCode2021
 {
     [TestClass]
-    public class UnitTestDays
+    public class UnitTestDay2
     {
         [TestMethod]
         public void Day2_ShouldGiveOutTheRightPosition_True()
@@ -20,9 +20,7 @@ forward 2
             var inputs = FileHelper.Read(demo);
             var day = new Day2();
             foreach (var i in inputs)
-            {
                 day.Parse(i);
-            }
             var pos = day.GetPosition();
             Assert.IsTrue(pos.Item1 == 15);
             Assert.IsTrue(pos.Item2 == 10);
@@ -1037,9 +1035,7 @@ forward 5
             var inputs = FileHelper.Read(demo);
             var day = new Day2();
             foreach (var i in inputs)
-            {
                 day.Parse(i);
-            }
             var pos = day.GetPosition();
 
             Assert.IsTrue(pos.Item1 * pos.Item2 == 1989014);
@@ -1059,9 +1055,7 @@ forward 2
             var inputs = FileHelper.Read(demo);
             var day = new Day22();
             foreach (var i in inputs)
-            {
                 day.Parse(i);
-            }
             var pos = day.GetPosition();
 
             Assert.IsTrue(pos.Item1 * pos.Item2 == 900);
@@ -2075,9 +2069,7 @@ forward 5
             var inputs = FileHelper.Read(demo);
             var day = new Day22();
             foreach (var i in inputs)
-            {
                 day.Parse(i);
-            }
             var pos = day.GetPosition();
 
             Assert.IsTrue(pos.Item1 * pos.Item2 == 2006917119);

@@ -4,11 +4,11 @@ namespace AdventOfCode2021.Models
 {
     public class Day22
     {
-        private (int, int, int) Position;
+        private (int, int, int) position;
 
         public Day22()
         {
-            Position = (0, 0, 0);
+            position = (0, 0, 0);
         }
 
         //down X increases your aim by X units.
@@ -20,18 +20,18 @@ namespace AdventOfCode2021.Models
         {
             if (action.Contains("forward"))
             {
-                Position.Item1 += Convert.ToInt32(action.Replace("forward ", string.Empty));
-                Position.Item2 += Position.Item3 * Convert.ToInt32(action.Replace("forward ", string.Empty));
+                position.Item1 += Convert.ToInt32(action.Replace("forward ", string.Empty));
+                position.Item2 += position.Item3 * Convert.ToInt32(action.Replace("forward ", string.Empty));
             }
             else if (action.Contains("down"))
-                Position.Item3 += Convert.ToInt32(action.Replace("down ", string.Empty));
+                position.Item3 += Convert.ToInt32(action.Replace("down ", string.Empty));
             else
-                Position.Item3 -= Convert.ToInt32(action.Replace("up ", string.Empty));
+                position.Item3 -= Convert.ToInt32(action.Replace("up ", string.Empty));
         }
 
         public (int, int, int) GetPosition()
         {
-            return Position;
+            return position;
         }
     }
 }
