@@ -11,7 +11,7 @@ namespace AdventOfCode2021.Models
             Board = board;
             Number = number;
         }
-        public int[,]  Board { get; set; }
+        public int[,] Board { get; set; }
         public int Number { get; set; }
     }
 
@@ -29,14 +29,68 @@ namespace AdventOfCode2021.Models
         {
             var count = 0;
             for (int i = 0; i < res.Board.GetLength(0); i++)
-            {
                 for (int j = 0; j < res.Board.GetLength(1); j++)
+                    if (res.Board[i, j] != -1)
+                        count += res.Board[i, j];
+            return count * res.Number;
+        }
+ 
+        public Result LastBoard()
+        {
+            List<Result> results = new List<Result>();
+            List<int> index = new List<int>();
+            foreach (var n in numbers)
+            { 
+                if (index.Count == boards.Count)
+                    break;
+                for (int k = 0; k < boards.Count; k++)
                 {
-                    count += res.Board[i, j];
+                    if (!index.Contains(k))
+                    {
+                        var b = boards[k];
+                        var isOk = false;
+                        for (int i = 0; i < b.GetLength(0); i++)
+                        {
+                            var count = 0;
+                            for (int j = 0; j < b.GetLength(1); j++)
+                            {
+                                if (b[i, j] == n)
+                                    b[i, j] = -1;
+                                count += b[i, j];
+                            }
+                            if (count == -5)
+                            {
+                                results.Add(new Result(b, n));
+                                isOk = true;
+                                index.Add(k);
+                                break;
+                            }
+                        }
+                        if (!isOk)
+                        {
+                            for (int j = 0; j < b.GetLength(1); j++)
+                            {
+                                var count = 0;
+                                for (int i = 0; i < b.GetLength(0); i++)
+                                {
+                                    if (b[i, j] == n)
+                                        b[i, j] = -1;
+                                    count += b[i, j];
+                                }
+                                if (count == -5)
+                                {
+                                    results.Add(new Result(b, n));
+                                    isOk = true;
+                                    index.Add(k);
+                                    break;
+                                }
+                            }
+                        }
+                    } 
                 }
             }
-            return count * res.Number;
-        } 
+            return results.Last();
+        }
 
         public Result Board()
         {
@@ -51,10 +105,10 @@ namespace AdventOfCode2021.Models
                         for (int j = 0; j < b.GetLength(1); j++)
                         {
                             if (b[i, j] == n)
-                                b[i, j] = 0;
+                                b[i, j] = -1;
                             count += b[i, j];
                         }
-                        if (count == 0)
+                        if (count == -5)
                             return new Result(b, n);
                     }
                     for (int j = 0; j < b.GetLength(1); j++)
@@ -63,15 +117,15 @@ namespace AdventOfCode2021.Models
                         for (int i = 0; i < b.GetLength(0); i++)
                         {
                             if (b[i, j] == n)
-                                b[i, j] = 0;
+                                b[i, j] = -1;
                             count += b[i, j];
                         }
-                        if (count == 0)
+                        if (count == -5)
                             return new Result(b, n);
                     }
                 }
             }
-            return new Result(new int[0,0], 0);
+            return new Result(new int[0, 0], 0);
         }
 
 
