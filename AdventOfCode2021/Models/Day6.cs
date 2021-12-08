@@ -7,18 +7,18 @@ namespace AdventOfCode2021.Models
     public class Day6
     {
 
-        private List<int> fishes;
+        private List<long> fishes;
         public Day6()
         {
-            fishes = new List<int>();
+            fishes = new List<long>();
         }
         public void Parse(string? values)
         {
             if (!string.IsNullOrEmpty(values))
-                fishes = values.Split(",").Select(x => Convert.ToInt32(x)).ToList();
+                fishes = values.Split(",").Select(x => Convert.ToInt64(x)).ToList();
         }
 
-        public int TimePassing(int days)
+        public long TimePassing(int days)
         {
             days++; 
             for (int i = 1; i < days; i++)
@@ -36,7 +36,7 @@ namespace AdventOfCode2021.Models
                 fishes = buffer;
             }
             return fishes.Count;
-        }
+        } 
     }
 }
  
